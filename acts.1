@@ -1,0 +1,32 @@
+.TH ACTS 1
+.SH NAME
+acts \- View or Edit activities on the activity stream
+.SH SYNOPSIS
+.B acts \fIcommand\fR [\fIarguments...\fR]
+.SH DESCRIPTION
+.B acts
+modifies files by toggling a randomly chosen bit.
+is the command line interface for the activity stream. Activity stream is a list of 'to do' items with a date. 
+
+.SH COMMANDS
+.TP
+.BR get " "
+Show all items that have datestamps earlier than right now and that have not been deleted or marked 'done'
+.TP
+.BR new [\fIdate\fR] \fItime\fR " " \fItext\fR
+Create a new entry in the activity stream. If the date is omitted then today is assumed.
+.TP
+.BR new \fInow\fR " " \fItext\fR
+Create a new entry in the activity stream with right now as the associated time.
+.TP
+.BR done \fIindex\fR 
+Marks the item as 'done' \- it no longer will display.
+.TP
+.BR delete  \fIindex\fR 
+Marks the item as 'deleted' \- it no longer will display.
+.TP
+.BR delay  \fIindex\fR " " \fIcount\fR " " \fIunit\fR
+Deletes the item identified by the \fIindex\fR and creates a new one with a datestamp
+\fIcount\fR number of \fIunit\fRs later than the original item.
+Valid units are minutes, hours, days, weeks, months.
+
