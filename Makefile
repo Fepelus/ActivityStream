@@ -1,10 +1,4 @@
-all: activity acts
-
-#hud: hud.go
-#	go build hud.go
-
-activity: activity.go
-	go build $<
+all: acts
 
 acts: acts.go */*go
 	go build $<

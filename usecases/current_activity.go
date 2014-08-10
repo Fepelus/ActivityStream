@@ -1,9 +1,15 @@
+/*
+Acts - add, display and delete activities to do.
+Copyright (C) 2014  Patrick Borgeest
+See LICENSE.txt for terms of usage.
+*/
+
 package usecases
 
 import (
 	"time"
 
-	"bitbucket.org/pborgeest/activity/entities"
+	"github.com/Fepelus/ActivityStream/entities"
 )
 
 type CommandGetter interface {

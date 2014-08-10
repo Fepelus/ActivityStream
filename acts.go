@@ -1,3 +1,9 @@
+/*
+Acts - add, display and delete activities to do.
+Copyright (C) 2014  Patrick Borgeest
+See LICENSE.txt for terms of usage.
+*/
+
 package main
 
 import (
@@ -7,9 +13,9 @@ import (
 	"time"
 
 	"bytes"
-	"bitbucket.org/pborgeest/activity/boundaries"
-	"bitbucket.org/pborgeest/activity/entities"
-	"bitbucket.org/pborgeest/activity/usecases"
+	"github.com/Fepelus/ActivityStream/boundaries"
+	"github.com/Fepelus/ActivityStream/entities"
+	"github.com/Fepelus/ActivityStream/usecases"
 )
 
 func main() {

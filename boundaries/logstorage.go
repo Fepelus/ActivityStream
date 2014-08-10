@@ -1,3 +1,9 @@
+/*
+Acts - add, display and delete activities to do.
+Copyright (C) 2014  Patrick Borgeest
+See LICENSE.txt for terms of usage.
+*/
+
 package boundaries
 
 import (
@@ -8,7 +14,7 @@ import (
 	"time"
 
 	"bufio"
-	"bitbucket.org/pborgeest/activity/entities"
+	"github.com/Fepelus/ActivityStream/entities"
 )
 
 type Logfile struct {
