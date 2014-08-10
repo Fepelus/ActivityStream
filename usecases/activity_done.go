@@ -32,7 +32,7 @@ func MarkActivityAsDone(id string, deleter CommandDeleter) error {
 		var buffer bytes.Buffer
 		buffer.WriteString("Ambiguous ID matches:\n")
 		for i := 0; i < len(activities); i++ {
-			buffer.WriteString(activities[i].String())
+			buffer.WriteString(activities[i].IndexedString())
 			buffer.WriteString("\n")
 		}
 		buffer.WriteString("\nNothing has been deleted. You may try again.\n")

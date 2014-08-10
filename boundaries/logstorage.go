@@ -119,16 +119,45 @@ func (this Logfile) GetAll() entities.Activities {
 }
 
 func (this Logfile) FindActivity(id string) entities.Activities {
+	loglines := []LogLine{}
 	output := entities.Activities{}
 	f, _ := os.Open(this.Filename)
 	scanner := bufio.NewScanner(f)
 	for scanner.Scan() {
 		thisline := ParseLogLine(scanner.Text())
 		if thisline.Id[0:len(id)] == id {
-			output = append(output, (ParseLogLine(scanner.Text())).Activity)
+			loglines = append(loglines, thisline)
+		}
+	}
+	for _, el := range removeDeletedActivities(loglines) {
+		output = append(output, el.Activity)
+	}
+	return output
+}
+
+func removeDeletedActivities(input []LogLine) []LogLine {
+	output := []LogLine{}
+	deletedList := []string{}
+	for _, firstlogline := range input {
+		if firstlogline.Command == "DELETE" {
+			deletedList = append(deletedList, firstlogline.Id)
+		}
+	}
+	for _, secondlogline := range input {
+		if !stringInSlice(secondlogline.Id, deletedList) {
+			output = append(output, secondlogline)
 		}
 	}
 	return output
+}
+
+func stringInSlice(a string, list []string) bool {
+	for _, b := range list {
+		if b == a {
+			return true
+		}
+	}
+	return false
 }
 
 func (this Logfile) Delete(activity entities.OneActivity) error {
