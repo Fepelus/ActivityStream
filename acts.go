@@ -142,13 +142,13 @@ func delayItem(args []string) {
 		help(args)
 		return
 	}
-	if len(args) < 2 {
-		if err := usecases.DelayActivityOneDay(args[0], getLogfile()); err != nil {
+	if len(args) == 1 {
+		if err := usecases.DelayActivity(args[0], 1, "day", getLogfile()); err != nil {
 			fmt.Print(err)
 		}
 		return
 	}
-	if len(args) < 3 {
+	if len(args) == 2 {
 		fmt.Println("Arguments to delayItem were only:", args)
 		help(args)
 		return
