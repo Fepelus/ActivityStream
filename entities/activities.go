@@ -26,7 +26,7 @@ func (this OneActivity) IndexedString() string {
 	if this.HasRepeatCommand() {
 		star = "*"
 	}
-	return fmt.Sprintf("[%s]%s %s %s", this.Id, star, this.TimeString(), this.Body)
+	return fmt.Sprintf("[\033[1m%s\033[0m]%s %s %s", this.Id, star, this.TimeString(), this.Body)
 }
 
 func (this OneActivity) String() string {

@@ -137,12 +137,22 @@ func doneItem(args []string) {
 
 func delayItem(args []string) {
 	//delay ID count unit ('hours' 'days')
+	if len(args) < 1 {
+		fmt.Println("Arguments to delayItem were only:", args)
+		help(args)
+		return
+	}
+	if len(args) < 2 {
+		if err := usecases.DelayActivityOneDay(args[0], getLogfile()); err != nil {
+			fmt.Print(err)
+		}
+		return
+	}
 	if len(args) < 3 {
 		fmt.Println("Arguments to delayItem were only:", args)
 		help(args)
 		return
 	}
-
 	count, err := strconv.Atoi(args[1])
 	if err != nil {
 		fmt.Print(err)

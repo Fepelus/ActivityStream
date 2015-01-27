@@ -66,6 +66,10 @@ func DelayActivity(id string, count int, unit string, delayer CommandDelayer) er
 	return nil
 }
 
+func DelayActivityOneDay(id string, delayer CommandDelayer) error {
+	return DelayActivity(id, 1, "day", delayer)
+}
+
 func delayTimestamp(input time.Time, count int, unit string) (time.Time, error) {
 	if unit == "month" || unit == "months" {
 		return input.AddDate(0, count, 0), nil
