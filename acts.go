@@ -26,6 +26,7 @@ func main() {
 		"del":    doneItem,
 		"delete": doneItem,
 		"delay":  delayItem,
+		"grep":   grepItems,
 		"get":    getActivity,
 		"help":   help,
 	}
@@ -135,6 +136,20 @@ func doneItem(args []string) {
 	}
 }
 
+func grepItems(args []string) {
+	if len(args) < 1 {
+		fmt.Println("Arguments to doneItem were only:", args)
+		help(args)
+		return
+	}
+	grepped := usecases.GrepItems("("+args[0], getLogfile())
+	if grepped != nil {
+		for _, el := range grepped {
+			fmt.Println(el)
+		}
+	}
+}
+
 func delayItem(args []string) {
 	//delay ID count unit ('hours' 'days')
 	if len(args) < 1 {
@@ -177,6 +192,7 @@ func help(args []string) {
     get
     new [date] [time] [body]
     done [ID]
+    grep [ID]
     delay [ID] [count] [unit] ('minutes' 'hours' 'days' 'weeks' 'months')
 `, os.Args[0])
 }

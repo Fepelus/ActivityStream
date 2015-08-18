@@ -11,6 +11,7 @@ import (
 	"fmt"
 	"os"
 	"regexp"
+	"strings"
 	"time"
 
 	"bufio"
@@ -175,4 +176,17 @@ func (this Logfile) Delete(activity entities.OneActivity) error {
 	}
 
 	return this.appendThisLine(thisLine)
+}
+
+func (this Logfile) Grep(id string) []string {
+	loglines := []string{}
+	f, _ := os.Open(this.Filename)
+	scanner := bufio.NewScanner(f)
+	for scanner.Scan() {
+		thisline := scanner.Text()
+		if strings.Contains(thisline, id) {
+			loglines = append(loglines, thisline)
+		}
+	}
+	return loglines
 }
