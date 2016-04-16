@@ -27,6 +27,7 @@ type CommandDelayer interface {
 // It creates a new command with the same details as the old command
 // It alters the timestamp of the new command
 // It sends the new command to the delayer to store as a new command
+// And returns the hash id of the new command
 //
 // Alternative flows :-
 //  if the ID matches no activities then return a message to the user
@@ -34,11 +35,11 @@ type CommandDelayer interface {
 //  if the unit is not among the legal strings then return a message to the user
 //  In any of the alternative flows, no entries are written to the delayer.
 //
-func DelayActivity(id string, count int, unit string, delayer CommandDelayer) error {
+func DelayActivity(id string, count int, unit string, delayer CommandDelayer) (string, error) {
 	activities := delayer.FindActivity(id)
 
 	if len(activities) == 0 {
-		return fmt.Errorf("No activities found with index %s\n", id)
+		return "", fmt.Errorf("No activities found with index %s\n", id)
 	}
 	if len(activities) > 1 {
 		var buffer bytes.Buffer
@@ -48,22 +49,22 @@ func DelayActivity(id string, count int, unit string, delayer CommandDelayer) er
 			buffer.WriteString("\n")
 		}
 		buffer.WriteString("\nNothing has been deleted. You may try again.\n")
-		return fmt.Errorf(buffer.String())
+		return "", fmt.Errorf(buffer.String())
 	}
 	thisActivity := activities[0]
 
 	newtimestamp, err := delayTimestamp(thisActivity.Timestamp, count, unit)
 	if err != nil {
-		return err
+		return "", err
 	}
 	delayer.Delete(activities[0])
-	delayer.AddNew(entities.OneActivity{
+    newHashId := delayer.AddNew(entities.OneActivity{
 		"",
 		newtimestamp,
 		thisActivity.CommandTag,
 		thisActivity.Body,
 	})
-	return nil
+	return newHashId, nil
 }
 
 func delayTimestamp(input time.Time, count int, unit string) (time.Time, error) {

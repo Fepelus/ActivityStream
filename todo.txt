@@ -1,0 +1,27 @@
+Features:
+- repeatable activities
+- reschedule activity
+- dynamic ID length
+- appspot front-end
+
+Repeatable activities:
+- acts done [duolingo]
+- acts done [feed the sourdough]
+- acts new repeat every 1 days from 12:00 Duolingo
+- acts new repeat after 1 week Water the plants
+
+Reschedule activity:
+- acts reschedule d1e 2014-08-19 11:00
+
+Dynamic ID length:
+- currently hard-coded at 3
+- the code assumes 3 in several places
+- users need ID to manipulate current and future items
+- on use-cases that display ID:
+	- determine before main path of use-case the minimum length of ID that gives uniqueness
+
+Appspot front-end:
+- Write a port that call the Drive API to get the actslog file
+- Write a web app 
+- Write a go server for appspot
+- And then stop for a morning tea

@@ -1,6 +1,6 @@
 /*
 Acts - add, display and delete activities to do.
-Copyright (C) 2014  Patrick Borgeest
+Copyright (C) 2016  Patrick Borgeest
 See LICENSE.txt for terms of usage.
 */
 
@@ -8,9 +8,6 @@ package main
 
 import (
 	"fmt"
-	"os"
-	"strconv"
-	"time"
 
 	"bytes"
 	"github.com/Fepelus/ActivityStream/boundaries"
@@ -54,7 +51,7 @@ func newItem(args []string) {
 
 	activity, err := entities.ParseOneActivity(wholeInput)
 	if err != nil {
-		fmt.Print("Error: ", err)
+		fmt.Println("You probably meant to say 'new now'")
 		return
 	}
 	fmt.Println(usecases.AddItem(activity, getLogfile()))
